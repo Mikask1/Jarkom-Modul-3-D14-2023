@@ -853,6 +853,97 @@ Testing dari client
 ab -n 100 -c 10 -p login.json -T application/json http://riegel.canyon.d14.com/api/auth/login
 ```
 
+# Nomor 19 
+
+Pada laravel worker gunakan script berikut
+
+
+
+		
+		[www]
+		user = www-data
+		group = www-data
+		listen = /run/php/php8.0-fpm.sock
+		listen.owner = www-data
+		listen.group = www-data
+		php_admin_value[disable_functions] = exec,passthru,shell_exec,system
+		php_admin_flag[allow_url_fopen] = off
+		; Choose how the process manager will control the number of child processes.
+		pm = dynamic
+		pm.max_children = 15 
+		pm.start_servers = 12 
+		pm.min_spare_servers = 2 
+		pm.max_spare_servers = 13
+		'
+
+
+		[www]
+		user = www-data
+		group = www-data
+		listen = /run/php/php8.0-fpm.sock
+		listen.owner = www-data
+		listen.group = www-data
+		php_admin_value[disable_functions] = exec,passthru,shell_exec,system
+		php_admin_flag[allow_url_fopen] = off
+		; Choose how the process manager will control the number of child processes.
+		pm = dynamic
+		pm.max_children = 25 
+		pm.start_servers = 22 
+		pm.min_spare_servers = 3 
+		pm.max_spare_servers = 23
+
+
+		
+		[www]
+		user = www-data
+		group = www-data
+		listen = /run/php/php8.0-fpm.sock
+		listen.owner = www-data
+		listen.group = www-data
+		php_admin_value[disable_functions] = exec,passthru,shell_exec,system
+		php_admin_flag[allow_url_fopen] = off
+		; Choose how the process manager will control the number of child processes.
+		pm = dynamic
+		pm.max_children = 30
+		pm.start_servers = 25 
+		pm.min_spare_servers = 4 
+		pm.max_spare_servers = 25
+
+Lalu testing dari client 
+
+
+
+
+
+
+
+
+
+
+
+# Nomor 20
+
+Tambahkan pada config nginx di LB
+
+	
+	
+	upstream worker {
+	    least_conn;
+	    server 192.198.4.1:8001;
+	    server 192.198.4.2:8002;
+	    server 192.198.4.3:8003;
+	}
+	
+	server {
+	    listen 81;
+	    server_name riegel.canyon.d14.com www.riegel.canyon.d14.com;
+	
+	    location / {
+	        proxy_pass http://laravelserver;
+	    }
+
+Lalu test dari client
+
 
 
 
