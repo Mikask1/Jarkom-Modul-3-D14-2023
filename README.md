@@ -858,7 +858,7 @@ ab -n 100 -c 10 -p login.json -T application/json http://riegel.canyon.d14.com/a
 
 # Nomor 19 
 
-Pada laravel worker gunakan script berikut
+Pada laravel worker gunakan script berikut pada /etc/php/8.0/fpm/pool.d/www.conf
 
 
 
@@ -877,7 +877,7 @@ Pada laravel worker gunakan script berikut
 		pm.start_servers = 12 
 		pm.min_spare_servers = 2 
 		pm.max_spare_servers = 13
-		'
+		
 
 
 		[www]
@@ -915,10 +915,7 @@ Pada laravel worker gunakan script berikut
 Lalu testing dari client 
 
 
-
-
-
-
+ab -n 100 -c 10 http://192.198.2.2:80/
 
 
 
@@ -938,7 +935,7 @@ Tambahkan pada config nginx di LB
 	}
 	
 	server {
-	    listen 81;
+	    listen 80;
 	    server_name riegel.canyon.d14.com www.riegel.canyon.d14.com;
 	
 	    location / {
@@ -946,7 +943,7 @@ Tambahkan pada config nginx di LB
 	    }
 
 Lalu test dari client
-
+ab -n 100 -c 10 http://192.198.2.2:80/
 
 
 
