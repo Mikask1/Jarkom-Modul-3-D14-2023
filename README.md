@@ -414,10 +414,10 @@ server {
         server_name granz.channel.d14.com;
 
         location / {
-    allow 192.173.3.69;
-    allow 192.173.3.70;
-    allow 192.173.4.167;
-    allow 192.173.4.168;
+    allow 192.198.3.69;
+    allow 192.198.3.70;
+    allow 192.198.4.167;
+    allow 192.198.4.168;
     deny all;
                 proxy_pass http://phpserver;
 
