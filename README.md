@@ -555,9 +555,7 @@ Kemudian cek dari worker
 
 # Nomor 14
 
-
-
-Pada worker php install composer dan git 
+Pada worker laravel install composer dan git 
 ```
 wget https://getcomposer.org/download/2.0.13/composer.phar
 chmod +x composer.phar
